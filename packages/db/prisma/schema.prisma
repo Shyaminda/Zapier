@@ -32,9 +32,9 @@ model Zap {
 }
 
 model Trigger {
-  id        String @id @default(uuid())
-  zapId      String @unique
-  triggerId  String       //triggerId is the id of the trigger(webhook id , slack id etc) available trigger id  (33.1 | Zapier part 1 | 1.51h)
+  id           String @id @default(uuid())
+  zapId        String @unique
+  triggerId    String       //triggerId is the id of the trigger(webhook id , slack id etc) available trigger id  (33.1 | Zapier part 1 | 1.51h)
   type AvailableTriggers @relation(fields: [triggerId], references: [id])
   zap  Zap               @relation(fields: [zapId], references: [id])
 }
@@ -45,6 +45,7 @@ model Action{
   actionId   String
   zap  Zap               @relation(fields: [zapId], references: [id])
   type AvailableActions  @relation(fields: [actionId], references: [id])
+  sortingOrder Int @default(0)
 }
 
 model AvailableActions {
