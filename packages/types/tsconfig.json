@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "declaration": true,                // Generate .d.ts files for type definitions.
+    "emitDeclarationOnly": true,       // Emit only type declarations (no JavaScript).
+    "outDir": "./dist",                // Output folder for compiled files.
+    "rootDir": "./src",                // Root folder of input files.
+    "strict": true,                    // Enable strict type checking options.
+    "esModuleInterop": true,           // Allow default imports from CommonJS modules.
+    "skipLibCheck": true               // Skip type checks for declaration files.
+  },
+  "include": ["src/**/*"],             // Files to include.
+  "exclude": ["node_modules", "dist"]  // Files to exclude.
+}
