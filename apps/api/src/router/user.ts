@@ -9,10 +9,11 @@ const router = Router();
 const prisma = new PrismaClient();
 
 router.post('/login', async (req, res): Promise<any> => {
-    const username = req.body.userName;
-    const parsedData = LoginSchema.safeParse(username);
+    const body = req.body;
+    const parsedData = LoginSchema.safeParse(body);
 
     if (!parsedData.success) {
+        console.log(parsedData.error);
         return res.status(411).json({ 
             message: "please provide valid data", 
         });
@@ -44,14 +45,23 @@ router.post('/login', async (req, res): Promise<any> => {
 });
 
 router.post('/signUp', async (req, res): Promise<any> => {
-    const username = req.body.userName;
-    const parsedData = SignupSchema.safeParse(username);
+    const body = req.body;
+    const parsedData = SignupSchema.safeParse(body);
 
     if (!parsedData.success) {
+        console.log(parsedData.error);
         return res.status(411).json({ 
             message: "please provide valid data", 
         });
     }
+
+    // if (!parsedData.success) {
+    //     return res.status(400).json({
+    //         errors: parsedData.error.errors.map(error => ({
+    //             message: error.message
+    //         })),
+    //     });
+    // }
 
     const userExists = await prisma.user.findFirst({
         where: {
@@ -79,7 +89,7 @@ router.post('/signUp', async (req, res): Promise<any> => {
     })
 });
 
-router.get('/user', authMiddleware, async (req, res): Promise<any> => {
+router.get('/', authMiddleware, async (req, res): Promise<any> => {
     //@ts-ignore
     const id = req.id;
     const user = await prisma.user.findFirst({

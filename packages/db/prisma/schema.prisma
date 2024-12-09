@@ -20,15 +20,18 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  zaps      Zap[]
 }
 
 model Zap {
   id        String @id @default(uuid())
-  triggerId  String                  
+  triggerId  String?    
+  userId     Int
   trigger    Trigger?
-  actionId   String
+  actionId   String?
   actions    Action[]
   ZapRun     ZapRun[]
+  User       User @relation(fields: [userId], references: [id])
 }
 
 model Trigger {
