@@ -3,8 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { authMiddleware } from '../middleware';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
-import { LoginSchema, SignupSchema } from '@repo/types';
-
+import { SignupSchema, LoginSchema } from '@repo/types';
 
 const router = Router();
 const prisma = new PrismaClient();

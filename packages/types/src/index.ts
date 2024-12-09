@@ -1,0 +1,1 @@
+export * from "./types";    //declaration file needed in dist folder make declaration true in tsconfig.json
