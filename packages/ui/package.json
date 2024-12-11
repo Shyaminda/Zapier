@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./dark-button": "./src/dark-button.tsx",
     "./secondary-button": "./src/secondary-button.tsx",
     "./primary-button": "./src/primary-button.tsx",
     "./link-button": "./src/link-button.tsx",
