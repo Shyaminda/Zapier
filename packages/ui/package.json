@@ -1,10 +1,11 @@
 {
   "name": "@repo/ui",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
   "exports": {
-    "./button": "./src/button.tsx",
+    "./secondary-button": "./src/secondary-button.tsx",
+    "./primary-button": "./src/primary-button.tsx",
+    "./link-button": "./src/link-button.tsx",
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx"
   },
