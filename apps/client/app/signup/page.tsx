@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 export default function() {
     const router = useRouter();
-    const [username, setUsername] = useState("");
+    const [userName , setUserName ] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -36,7 +36,7 @@ export default function() {
 
                 <div className="flex-1 pt-6 pb-6 mt-12 rounded px-4 border">
                     <Input label={"Username"} placeholder="Enter your username" onChange={e => {
-                        setUsername(e.target.value);
+                        setUserName(e.target.value);
                     }} type="text" />
                     <Input label={"Email"} placeholder="Enter your email" onChange={e => {
                         setEmail(e.target.value);
@@ -47,7 +47,7 @@ export default function() {
                     <div className="pt-4">
                         <PrimaryButton onClick={async () => {
                             const res = await axios.post(`${BACKEND_URL}/api/v1/user/signUp`, {
-                                username,
+                                userName ,
                                 email,
                                 password
                             });

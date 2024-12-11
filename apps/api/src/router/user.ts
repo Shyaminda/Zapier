@@ -14,7 +14,7 @@ router.post('/login', async (req, res): Promise<any> => {
 
     if (!parsedData.success) {
         console.log(parsedData.error);
-        return res.status(411).json({ 
+        return res.status(400).json({ 
             message: "please provide valid data", 
         });
     }
@@ -38,7 +38,8 @@ router.post('/login', async (req, res): Promise<any> => {
         //userName: user.userName
     }, JWT_SECRET);
 
-    res.json({
+    res.status(200).json({
+        message: "Login successful",
         token: token,
     });
 
@@ -50,7 +51,7 @@ router.post('/signUp', async (req, res): Promise<any> => {
 
     if (!parsedData.success) {
         console.log(parsedData.error);
-        return res.status(411).json({ 
+        return res.status(400).json({ 
             message: "please provide valid data", 
         });
     }
@@ -98,9 +99,9 @@ router.get('/', authMiddleware, async (req, res): Promise<any> => {
         },
     });
 
-    return res.json({
+    return res.status(200).json({
         user,
-    })
+    });
 
 });
 

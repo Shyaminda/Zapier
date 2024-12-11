@@ -9,6 +9,6 @@ export const Input = ({label, placeholder, onChange, type = "text"} : {
         <div className="text-sm pb-1 pt-2">
             <label>{label}</label>
         </div>
-        <input className="rounded px-4 py-2 w-full border" type={type} placeholder={placeholder} onChange={onChange} />
+        <input className="rounded px-4 py-2 w-full border text-black" type={type} placeholder={placeholder} onChange={onChange} />
     </div>
 };
