@@ -4,7 +4,7 @@ import { Appbar } from "@/components/Appbar";
 import { DarkButton } from "@repo/ui/dark-button";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL, HOOKS_URL } from "../config";
 import { LinkButton } from "@repo/ui/link-button";
 import { useRouter } from "next/navigation";
 
@@ -71,6 +71,7 @@ interface Zap {
         type: {
             id: string;
             name: string;
+            image: string;
         };
     };
     actions: {
@@ -81,6 +82,7 @@ interface Zap {
         type: {
             id: string;
             name: string;
+            image: string;
         };
     }[];
 }
@@ -151,18 +153,25 @@ export default function() {
 
 function ZapTable({zaps}: {zaps: Zap[]}) {
     const router = useRouter();
-    return <div className="p-8 max-w-screen-lg w-full">
+    return <div className="p-8 max-w-screen-2xl w-full">
             <div className="flex">
                 <div className="flex-1">Name</div>
                 <div className="flex-1">Id</div>
                 <div className="flex-1">Created at</div>
+                <div className="flex-1">Webhook URL</div>
                 <div className="flex-1">Go</div>
             </div>
             {zaps.map(z => (
                 <div className="flex border-b border-t py-4" key={z.id}>
-                    <div className="flex-1">{z.trigger.type.name} {z.actions.map(x => x.type.name + "")}</div>
+                    {/* <div className="flex-1">{z.trigger.type.name} {z.actions.map(x => x.type.name + " ")}</div> */}
+                    <div className="flex-1 flex"><img className="w-[40px] h-[30px] pr-2" src={z.trigger.type.image}  />
+                        {z.actions.map((x, i) => (
+                            <img key={i} src={x.type.image} className="w-[40px] h-[30px] pr-1" alt={`Action Image ${i + 1}`} />
+                        ))}
+                    </div>
                     <div className="flex-1">{z.id}</div>
                     <div className="flex-1">December</div>
+                    <div className="flex-1">{`${HOOKS_URL}/hooks/catch/1/${z.id}`}</div>  {/* this is the link we will be adding to the github */}
                     <div className="flex-1"><LinkButton onClick={() => {
                         router.push("/zap/" + z.id);
                     }}>Go</LinkButton></div>
