@@ -5,6 +5,7 @@ import { Appbar } from "@/components/Appbar";
 import { ZapCell } from "@/components/ZapCell";
 import { PrimaryButton } from "@repo/ui/primary-button";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 function useAvailableActionsAndTriggers() {
@@ -22,6 +23,7 @@ function useAvailableActionsAndTriggers() {
 }
 
 export default function() {
+    const router = useRouter();
     const {availableActions, availableTriggers} = useAvailableActionsAndTriggers();
     const [selectedTrigger, setSelectedTrigger] = useState<{
         id: string;
@@ -39,6 +41,27 @@ export default function() {
     return (
         <div>
             <Appbar />
+            <div className="flex justify-end bg-slate-200 p-4">
+                <PrimaryButton onClick={async () => {
+                    if (!selectedTrigger?.id) {
+                        return;
+                    }
+
+                    const response = await axios.post(`${BACKEND_URL}/api/v1/zap`, {
+                        "availableTriggerId": selectedTrigger.id,
+                        "triggerMetadata": {},
+                        "actions": selectedAction.map(action => ({
+                            "availableActionId": action.availableActionId,
+                            "actionMetadata": {}
+                        }))
+                    }, {
+                        headers: {
+                            Authorization : localStorage.getItem("token")
+                        }
+                    });
+                    router.push(`/dashboard`);
+                }}>Publish</PrimaryButton>
+            </div>
             <div className="w-full flex min-h-screen bg-slate-200 flex-col justify-center">
                 <div className="flex justify-center w-full">
                     <ZapCell name={selectedTrigger?.name ? selectedTrigger?.name : "Trigger"} index={1} image={selectedTrigger?.image} onClick={() => {
