@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { JsonObject } from '@prisma/client/runtime/library';
 import { Kafka } from 'kafkajs';
+import { parse } from './parser';
 
 const prisma = new PrismaClient();
 const TOPIC_NAME = 'zap-events';
@@ -22,11 +23,11 @@ async function process() {
     await consumer.run({
         autoCommit: false,  
         eachMessage: async ({topic, partition, message}) => {
-            console.log({
-                partition,
-                offset: message.offset,
-                value: message.value?.toString()
-            });
+            // console.log({
+            //     partition,
+            //     offset: message.offset,
+            //     value: message.value?.toString()
+            // });
 
             if(!message.value?.toString()){
                 return;
@@ -60,20 +61,20 @@ async function process() {
                 return;
             }
 
-            console.log(currentAction);
-            if(currentAction.type.id === "email"){
-                const body =(currentAction.metadata as JsonObject)?.body;  //you have received {comment.amount}
-                const to = (currentAction.metadata as JsonObject)?.email;  //{comment.email}
-                const zapRunMetadata = zapRunDetails?.metadata;            //{comment: {email: "god@gmail.com"}
-            }
-            
+            //console.log(currentAction);
+
+            const zapRunMetadata = zapRunDetails?.metadata;            //{comment: {email: "god@gmail.com"}
 
             if(currentAction.type.id === "email"){
-                console.log("Sending email");
+                const body = parse((currentAction.metadata as JsonObject)?.body as string, zapRunMetadata)  //you have received {comment.amount}
+                const to = parse((currentAction.metadata as JsonObject)?.email as string, zapRunMetadata)  //{comment.email}
+                console.log(`sending out email to ${to} with body ${body}`);
             }
 
             if(currentAction.type.id === "send-sol"){
-                console.log("Sending sol");
+                const amount = parse((currentAction.metadata as JsonObject)?.amount as string, zapRunMetadata)  //you have received {comment.amount}
+                const address = parse((currentAction.metadata as JsonObject)?.address as string, zapRunMetadata)  //{comment.email}
+                console.log(`sending out solana to ${address} of amount ${amount}`);
             }
 
             await new Promise(resolve => setTimeout(resolve, 500));
