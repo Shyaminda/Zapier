@@ -1,15 +1,16 @@
 {
-  "name": "processor",
+  "name": "db",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "dev": "tsc -b && node dist/index.js"
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "kafkajs": "^2.2.4"
+    "@prisma/client": "^6.0.1",
+    "ts-node": "^10.9.2"
   }
 }

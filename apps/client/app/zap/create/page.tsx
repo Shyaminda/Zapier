@@ -135,7 +135,7 @@ function Modal({index, onSelect, availableItems}: {index:number, onSelect: (prop
         const [selectedAction, setSelectedAction] = useState<{
             name: string;
             id: string;
-            image: string;
+            image: string;      //this is the state temporary data that is stored until the metadata is reached and then sent to the onSelect function
         }>();
         const isTrigger = index === 1;
 
@@ -178,7 +178,7 @@ function Modal({index, onSelect, availableItems}: {index:number, onSelect: (prop
                                         onSelect({name, id, image, metadata: {}});  //reason we added metadata to trigger is explained in the video 34.2 | Zapier Finishing Frontend and Backend 1.09h
                                     } else {
                                         setStep(s => s + 1);
-                                        setSelectedAction({name, id, image});   //this data is stored until the metadata is reached and then sent to the onSelect function 
+                                        setSelectedAction({name, id, image});   //this state temporary data is stored until the metadata is reached and then sent to the onSelect function 
                                     }                                           //watch 34.2 | Zapier Finishing Frontend and Backend 1.03h
                                 }} className="flex border p-4 cursor-pointer hover:bg-slate-800">
                                     <img className="rounded-full" src={image} width={30} /> <div className="flex flex-col justify-center pl-10">{name}</div>
@@ -221,3 +221,34 @@ function SolanaSelector({setMetadata}: {
         </div>
     </div>
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Current Flow Explanation:
+// The user selects an action in step === 0, and the basic information (name, id, image) is saved in selectedAction in the Modal.
+// If the action requires metadata (e.g., "Email" or "Send SOL"), the modal transitions to step === 1, where the metadata form is shown.
+// Once the user submits the metadata in forms like EmailSelector, the onSelect callback is called with the full data (name, id, image, and metadata).
+// The parent component (index.tsx) receives this data and updates the selectedAction array with all the necessary details.
+
+
+// When is Metadata Required?
+// Parent Component (index.tsx):
+// The selectedAction state in the parent component requires metadata because it needs complete details to publish the zap (trigger + actions + metadata).
+// Modal Component (Modal):
+// The selectedAction in the Modal does not need metadata since it’s a temporary state used while navigating the modal steps.
