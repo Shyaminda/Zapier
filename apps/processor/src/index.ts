@@ -19,12 +19,13 @@ async function process() {
             where:{},
             take: 10
         });
+        //console.log(pendingRecords);
 
         producer.send({
             topic: TOPIC_NAME,
             messages: pendingRecords.map(record => {     //sending bulk messages to kafka
                 return {
-                    value: JSON.stringify(record.zapRunId)
+                    value: JSON.stringify({zapRunId: record.zapRunId, stage: 0})
                 }
             })
         });
