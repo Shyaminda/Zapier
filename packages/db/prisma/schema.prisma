@@ -38,6 +38,7 @@ model Trigger {
   id           String @id @default(uuid())
   zapId        String @unique
   triggerId    String       //triggerId is the id of the trigger(webhook id , slack id etc) available trigger id  (33.1 | Zapier part 1 | 1.51h)
+  metadata     Json @default("{}")
   type AvailableTriggers @relation(fields: [triggerId], references: [id])
   zap  Zap               @relation(fields: [zapId], references: [id])
 }
@@ -46,6 +47,7 @@ model Action{
   id        String      @id @default(uuid())
   zapId      String     
   actionId   String
+  metadata     Json @default("{}")
   zap  Zap               @relation(fields: [zapId], references: [id])
   type AvailableActions  @relation(fields: [actionId], references: [id])
   sortingOrder Int @default(0)
