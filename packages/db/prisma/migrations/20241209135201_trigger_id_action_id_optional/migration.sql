@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Zap" ALTER COLUMN "triggerId" DROP NOT NULL,
-ALTER COLUMN "actionId" DROP NOT NULL;

@@ -8,5 +8,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "dotenv": "^16.4.7",
+    "nodemailer": "^6.9.16"
+  }
 }
