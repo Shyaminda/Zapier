@@ -80,7 +80,7 @@ async function process() {
                 const amount = parse((currentAction.metadata as JsonObject)?.amount as string, zapRunMetadata)  //you have received {comment.amount}
                 const address = parse((currentAction.metadata as JsonObject)?.address as string, zapRunMetadata)  //{comment.email}
                 console.log(`sending out solana to ${address} of amount ${amount}`);
-                await sendSol(address, amount);
+                //await sendSol(address, amount);
             }
 
             await new Promise(resolve => setTimeout(resolve, 500));
