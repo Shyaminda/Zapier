@@ -35,14 +35,13 @@ A Zapier-inspired automation system that enables webhook functionality for autom
 ---
 
 ## 📑 Index
-
-- [Features](#features)
-- [Built With](#built-with)
-- [Installation](#installation)
-- [How It Works](#how-it-works)
-- [Roadmap](#roadmap)
-- [Support](#support)
-- [License](#license)
+- [Features](#-features)
+- [Built With](#-built-with)
+- [Installation](#-installation)
+- [How It Works](#-how-it-works)
+- [Roadmap](#-roadmap)
+- [Support](#-support)
+- [License](#-license)
 
 ---
 
