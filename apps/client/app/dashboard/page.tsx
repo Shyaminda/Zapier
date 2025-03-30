@@ -163,7 +163,6 @@ function ZapTable({zaps}: {zaps: Zap[]}) {
             </div>
             {zaps.map(z => (
                 <div className="flex border-b border-t py-4" key={z.id}>
-                    {/* <div className="flex-1">{z.trigger.type.name} {z.actions.map(x => x.type.name + " ")}</div> */}
                     <div className="flex-1 flex"><img className="w-[40px] h-[30px] pr-2" src={z.trigger.type.image}  />
                         {z.actions.map((x, i) => (
                             <img key={i} src={x.type.image} className="w-[40px] h-[30px] pr-1" alt={`Action Image ${i + 1}`} />

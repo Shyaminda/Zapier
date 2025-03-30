@@ -41,14 +41,3 @@ export function parse(text: string, values: any, startDelimiter= "{", endDelimit
 
     return finalString;
 }
-
-// let value = parse (
-//         "my name is {comment.name} address is {comment.address} thanks",
-//     {
-//         comment: {
-//             name: "god",
-//             address: "earth"
-//         }
-//     }
-//     )
-// console.log(value)

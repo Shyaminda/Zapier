@@ -175,11 +175,11 @@ function Modal({index, onSelect, availableItems}: {index:number, onSelect: (prop
                         {step === 0 && <div>{availableItems.map(({id,name,image}) => {
                                 return <div key={id} onClick={() => {
                                     if(isTrigger){
-                                        onSelect({name, id, image, metadata: {}});  //reason we added metadata to trigger is explained in the video 34.2 | Zapier Finishing Frontend and Backend 1.09h
+                                        onSelect({name, id, image, metadata: {}});
                                     } else {
                                         setStep(s => s + 1);
                                         setSelectedAction({name, id, image});   //this state temporary data is stored until the metadata is reached and then sent to the onSelect function 
-                                    }                                           //watch 34.2 | Zapier Finishing Frontend and Backend 1.03h
+                                    }
                                 }} className="flex border p-4 cursor-pointer hover:bg-slate-800">
                                     <img className="rounded-full" src={image} width={30} /> <div className="flex flex-col justify-center pl-10">{name}</div>
                                 </div>

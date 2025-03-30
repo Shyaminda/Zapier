@@ -25,14 +25,8 @@ async function process() {
     await consumer.subscribe({topic: TOPIC_NAME, fromBeginning: true});
 
     await consumer.run({
-        autoCommit: false,  
+        autoCommit: false,  //acknowledgement is manual with the worker
         eachMessage: async ({topic, partition, message}) => {
-            // console.log({
-            //     partition,
-            //     offset: message.offset,
-            //     value: message.value?.toString()
-            // });
-
             if(!message.value?.toString()){
                 return;
             }
@@ -46,11 +40,11 @@ async function process() {
                     id: zapRunId
                 },
                 include: {
-                    zap: {        //for the zapRun find the associated zap
+                    zap: {        
                         include: {
-                            actions: {   //for that zap find the associated actions
+                            actions: {   
                                 include: {
-                                    type: true    //for that action find the associated type
+                                    type: true    
                                 }
                             }
                         }
@@ -65,7 +59,6 @@ async function process() {
                 return;
             }
 
-            //console.log(currentAction);
 
             const zapRunMetadata = zapRunDetails?.metadata;            //{comment: {email: "god@gmail.com"}
 
@@ -87,7 +80,6 @@ async function process() {
             const zapId = message.value?.toString();   
             const lastStage = (zapRunDetails?.zap.actions.length || 1) - 1; //1
             if(lastStage !== stage) {    //here stage starts from 0
-                //console.log("pushing back to the queue");
                 await producer.send({
                     topic: TOPIC_NAME,
                     messages: [{
@@ -102,7 +94,7 @@ async function process() {
             await consumer.commitOffsets([{
                 topic: TOPIC_NAME,
                 partition: partition,
-                offset: (parseInt(message.offset) + 1).toString()    //5
+                offset: (parseInt(message.offset) + 1).toString()
             }]) 
         }
     })

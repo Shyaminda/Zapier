@@ -36,21 +36,6 @@ router.post('/', authMiddleware, async (req, res): Promise<any> => {
                     }
                 }
             });
-            
-            // const trigger = await tx.trigger.create({
-            //     data: {
-            //         triggerId: parsedData.data.availableTriggerId,
-            //         zapId: zap.id,
-            //     }
-            // });
-            // await prisma.zap.update({
-            //     where: {
-            //         id: zap.id,
-            //     },
-            //     data: {
-            //         triggerId: trigger.id,
-            //     }
-            // })
             return zap.id;
         });  
     return res.status(200).json({
