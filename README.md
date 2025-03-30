@@ -13,41 +13,36 @@ A Zapier-inspired automation system that enables webhook functionality for autom
 ## 📸 Project Screenshots
 
 <details>
-  <summary>System design</summary>
+  <summary><strong>System Architecture</strong></summary>
   <img src="/apps/client/public/images/arch.png" alt="arch" />
 </details>
 
 <details>
-  <summary>Webhook trigger Setup</summary>
+  <summary><strong>Webhook trigger Setup</strong></summary>
   <img src="/apps/client/public/images/trigger.png" alt="trigger" />
 </details>
 
 <details>
-  <summary>Webhook actions Setup</summary>
+  <summary><strong>Webhook actions Setup</strong></summary>
   <img src="/apps/client/public/images/actions.png" alt="actions" />
 </details>
 
 <details>
-  <summary>Webhooks</summary>
+  <summary><strong>Webhooks</strong></summary>
   <img src="/apps/client/public/images/pub.png" alt="pub" />
-</details>
-
-<details>
-  <summary>Dashboard View</summary>
-  <img src="/apps/client/public/images/dashboard.png" alt="Dashboard View" />
 </details>
 
 ---
 
 ## 📑 Index
 
-- [Features](#-features)
-- [Built With](#-built-with)
-- [Installation](#-installation)
-- [How It Works](#-how-it-works)
-- [Roadmap](#-roadmap)
-- [Support](#-support)
-- [License](#-license)
+- [Features](#features)
+- [Built With](#built-with)
+- [Installation](#installation)
+- [How It Works](#how-it-works)
+- [Roadmap](#roadmap)
+- [Support](#support)
+- [License](#license)
 
 ---
 
@@ -76,8 +71,9 @@ A Zapier-inspired automation system that enables webhook functionality for autom
 - **Frontend**: Next.js
 - **Backend**: Express.js, Prisma
 - **Database**: PostgreSQL
-- **Messaging Queue**: Kafka
+- **Queue Processing**: Kafka (for Outbox Processor & Worker)
 - **Webhooks Processing**: Custom Webhook Handler
+- **Email Messaging**: AWS SMTP  
 - **Authentication**: JWT
 
 ---
@@ -190,14 +186,14 @@ cd apps/worker && npm run dev
 ```
 
 <details>
-  <summary>Postman data transfer</summary>
+  <summary><strong>Postman data transfer</summary>
   <img src="/apps/client/public/images/postman.png" alt="postman" />
 </details>
 
 3️⃣ **Processing Flow**
 
 <details>
-  <summary>System design</summary>
+  <summary><strong>System design</strong></summary>
   <img src="/apps/client/public/images/arch.png" alt="arch" />
 </details>
 
@@ -210,7 +206,7 @@ cd apps/worker && npm run dev
 - A response is sent back to GitHub.
 
 <details>
-  <summary>Successful console</summary>
+  <summary><strong>Successful console</strong></summary>
   <img src="/apps/client/public/images/console-success.png" alt="console-success" />
 </details>
 
@@ -220,10 +216,11 @@ cd apps/worker && npm run dev
 
 - 📂 Improve webhook logging and monitoring.
 - 🚀 Enhance UI for better visualization.
-- 🛠 Optimize Kafka event processing.
+- 🛠  Optimize Kafka event processing.
 - 🔧 Improve security and access control.
+- ⚙️ Deploy and manage services with **Kubernetes** for scalability.
 
-For the full list of planned improvements, check out the [TODO.md](./TODO.md) file.
+Planned improvements.
 
 ---
 
